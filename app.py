@@ -1,7 +1,7 @@
 from datetime import datetime 
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from waitress import serve
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
@@ -59,10 +59,4 @@ def delete(sno):
     db.session.delete(todo)
     db.session.commit()
     return redirect("/")
-
-
-
-
-if __name__ == '__main__':
-  serve(app, host="localhost", port=5000)
 
