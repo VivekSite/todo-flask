@@ -1,6 +1,7 @@
 from datetime import datetime 
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from waitress import serve
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
@@ -17,6 +18,8 @@ class Todo(db.Model) :
 
   def __repr__(self) -> str:
     return f"{self.sno} - {self.title}"
+
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -61,5 +64,5 @@ def delete(sno):
 
 
 if __name__ == '__main__':
-  app.run(debug=True, port=8080)
+  serve(app, host="localhost", port=5000)
 
